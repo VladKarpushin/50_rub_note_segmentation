@@ -20,7 +20,7 @@ Below you can see reference image
 Below you can see segmentation result
 ![Result of segmentation](/www/images/out.jpg)
 
-Reference
+References
 ------
 https://docs.opencv.org/4.0.0-alpha/d1/de0/tutorial_py_feature_homography.html
 
