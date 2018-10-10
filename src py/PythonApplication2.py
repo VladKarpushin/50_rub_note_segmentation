@@ -59,38 +59,33 @@ def FindRect(img1, img2):
 def main():
     print('Processing is started')
     img1 = cv.imread('..\\images\\50_2.jpg', cv.IMREAD_GRAYSCALE)           # box   (queryImage)
-    #img2 = cv.imread('..\\images\\P1030585.JPG', cv.IMREAD_GRAYSCALE)       # scene (trainImage)
-    #img2 = cv.imread('..\\images\\34.JPG', cv.IMREAD_GRAYSCALE)       # scene (trainImage)
-    #img2 = cv.imread('..\\images\\21.JPG', cv.IMREAD_GRAYSCALE)       # scene (trainImage)
-    img2 = cv.imread('..\\images\\P1030591.JPG', cv.IMREAD_GRAYSCALE)       # scene (trainImage)
-    #img2 = cv.imread('..\\images\\input.JPG', cv.IMREAD_GRAYSCALE)       # scene (trainImage)
-    if img1 is None or img2 is None:
+    #img2 = cv.imread('..\\images\\P1030591.JPG', cv.IMREAD_GRAYSCALE)       # scene (trainImage)
+    #if img1 is None or img2 is None:
+    if img1 is None:
         print('Could not open or find the images!')
         exit(0)
 
-#    cap = cv.VideoCapture(0)
-#    while(1):
-#        ret, frame = cap.read()
-#        if ret == True:
-#            img2 = cv.cvtColor(frame,cv.COLOR_BGR2GRAY)
-#            img3 = FindRect(img1, img2)
-#            cv.imshow('img3',img3)
-#            k = cv.waitKey(60) & 0xff
-#            if k == 27:
-#                print('k == 27')
-#                break
-#        else:
-#            break
-#    cv.destroyAllWindows()
-#    cap.release()
+    cap = cv.VideoCapture(0)
+    while(1):
+        ret, frame = cap.read()
+        if ret == True:
+            img2 = cv.cvtColor(frame,cv.COLOR_BGR2GRAY)
+            img3 = FindRect(img1, img2)
+            cv.imshow('img3',img3)
+            k = cv.waitKey(60) & 0xff
+            if k == 27:
+                print('k == 27')
+                break
+        else:
+            break
+    cv.destroyAllWindows()
+    cap.release()
 
-    img3 = FindRect(img1, img2)
+#    img3 = FindRect(img1, img2)
 
     #-- Show detected matches
-    cv.imwrite('..\\output\\out.jpg',img3)
-    #plt.imshow(img3, 'gray'),plt.show()
-    #cv.imshow('Matches', img3)
-    cv.waitKey()
+    #cv.imwrite('..\\output\\out.jpg',img3)
+    #cv.waitKey()
     print('Processing is finished')
 
-I = main()
+I = main() 
