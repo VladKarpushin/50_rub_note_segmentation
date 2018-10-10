@@ -42,8 +42,11 @@ def FindRect(img1, img2):
         matchesMask = mask.ravel().tolist()
         h,w = img1.shape
         pts = np.float32([ [0,0],[0,h-1],[w-1,h-1],[w-1,0] ]).reshape(-1,1,2)
-        dst = cv.perspectiveTransform(pts,M)
-        img2 = cv.polylines(img2,[np.int32(dst)],True,255,3, cv.LINE_AA)
+        if M is not None:
+            dst = cv.perspectiveTransform(pts,M)
+            img2 = cv.polylines(img2,[np.int32(dst)],True,255,3, cv.LINE_AA)
+        else:
+            print('M is None')
     else:
         print( "Not enough matches are found - {}/{}".format(len(good), MIN_MATCH_COUNT) )
         matchesMask = None
