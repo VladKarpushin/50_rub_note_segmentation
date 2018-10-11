@@ -1,35 +1,28 @@
 # 2018-10-10
-# task for azoft. 
+# A task for azoft. 
 # 1. Реализовать скрипт, который в реальном времени находит 50-рублевую купюру на изображениях с вебкамеры.
 
 import numpy as np
 import cv2 as cv
-from matplotlib import pyplot as plt
 
 MIN_MATCH_COUNT = 10
 
-#function newBoxPolygon = FindRect(boxImage, sceneImage)
 def FindRect(img1, img2):
-    # Initiate SIFT/SURF detector
+    #-- Step 1: Initiate SIFT/SURF detector and find the keypoints and descriptors with SIFT
     detector = cv.xfeatures2d.SIFT_create()
     #minHessian = 400
     #detector = cv.xfeatures2d.SURF_create(hessianThreshold=minHessian)
-
-    # Находим особые точки на обоих картинках, считаем их описатели
-    # find the keypoints and descriptors with SIFT
     kp1, des1 = detector.detectAndCompute(img1,None)
     kp2, des2 = detector.detectAndCompute(img2,None)
 
-    #-- Step 2: Matching descriptor vectors with a brute force matcher
-    # Since SURF is a floating-point descriptor NORM_L2 is used
-    # Находим соответствия
+    #-- Step 2: Matching descriptor vectors
     FLANN_INDEX_KDTREE = 1
     index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5)
     search_params = dict(checks = 50)
     flann = cv.FlannBasedMatcher(index_params, search_params)
     matches = flann.knnMatch(des1,des2,k=2)
 
-    # store all the good matches as per Lowe's ratio test.
+    # store all the good matches
     good = []
     for m,n in matches:
         if m.distance < 0.7*n.distance:
@@ -44,14 +37,14 @@ def FindRect(img1, img2):
         pts = np.float32([ [0,0],[0,h-1],[w-1,h-1],[w-1,0] ]).reshape(-1,1,2)
         if M is not None:
             dst = cv.perspectiveTransform(pts,M)
-            img2 = cv.polylines(img2,[np.int32(dst)],True,255,3, cv.LINE_AA)
+            img2 = cv.polylines(img2,[np.int32(dst)],True,255,3, cv.LINE_AA)    # Draw boiding rect with white color
         else:
             print('M is None')
     else:
         print( "Not enough matches are found - {}/{}".format(len(good), MIN_MATCH_COUNT) )
         matchesMask = None
 
-    #-- Draw matches
+    #-- Step 3: Draw matches
     draw_params = dict(matchColor = (0,255,0), # draw matches in green color
                        singlePointColor = None,
                        matchesMask = matchesMask, # draw only inliers
@@ -84,8 +77,7 @@ def main():
     cv.destroyAllWindows()
     cap.release()
 
-#    img3 = FindRect(img1, img2)
-
+    #img3 = FindRect(img1, img2)
     #-- Show detected matches
     #cv.imwrite('..\\output\\out.jpg',img3)
     #cv.waitKey()
