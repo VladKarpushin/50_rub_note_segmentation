@@ -20,6 +20,15 @@ Below you can see reference image
 Below you can see segmentation result
 ![Result of segmentation](/www/images/out1.jpg)
 
+Below you can see segmentation result
+![Result of segmentation](/www/images/out2.jpg)
+
+Below you can see segmentation result
+![Result of segmentation](/www/images/out3.jpg)
+
+Below you can see segmentation result
+![Result of segmentation](/www/images/out4.jpg)
+
 References
 ------
 https://docs.opencv.org/4.0.0-alpha/d1/de0/tutorial_py_feature_homography.html
