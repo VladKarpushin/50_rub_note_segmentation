@@ -15,6 +15,7 @@ SIFT and SURF features are used
 Result
 ------
 Below you can see reference image
+
 ![Reference image](/www/images/box.jpg)
 
 Below you can see segmentation result
