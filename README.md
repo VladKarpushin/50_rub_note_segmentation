@@ -18,7 +18,7 @@ Below you can see reference image
 ![Reference image](/www/images/box.jpg)
 
 Below you can see segmentation result
-![Result of segmentation](/www/images/out.jpg)
+![Result of segmentation](/www/images/out1.jpg)
 
 References
 ------
